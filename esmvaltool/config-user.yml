@@ -17,7 +17,7 @@ exit_on_warning: false
 # Plot file format? [ps]/pdf/png/eps/epsi
 output_file_type: png
 # text output file type
-textoutput_file_type: tex
+table_output_file_type: tex
 # Destination directory
 output_dir: ./esmvaltool_output
 # Use netCDF compression true/[false]

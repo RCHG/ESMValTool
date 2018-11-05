@@ -291,6 +291,7 @@ class DiagnosticTask(AbstractTask):
             'table_dir',
             'max_data_filesize',
             'output_file_type',
+            'table_output_file_type',
             'log_level',
             'write_plots',
             'write_netcdf',

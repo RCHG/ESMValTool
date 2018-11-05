@@ -948,7 +948,7 @@ class Recipe(object):
             # Copy other settings
             if self._support_ncl:
                 settings['exit_on_ncl_warning'] = self._cfg['exit_on_warning']
-            for key in ('max_data_filesize', 'output_file_type', 'log_level',
+            for key in ('max_data_filesize', 'output_file_type', 'table_output_file_type', 'log_level',
                         'write_plots', 'write_netcdf', 'write_table',
                         'profile_diagnostic'):
                 settings[key] = self._cfg[key]
