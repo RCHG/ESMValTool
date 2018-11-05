@@ -142,7 +142,6 @@ def get_cfg(filename=None):
     with open(filename) as file:
         cfg = yaml.safe_load(file)
 
-    print('get-cfg', cfg)
     return cfg
 
 
@@ -202,7 +201,6 @@ def run_diagnostic():
 
     cfg = get_cfg(args.filename)
 
-    print('Here',cfg)
     
     # Set up logging
     if args.log_level:
