@@ -204,7 +204,6 @@ def _find_input_dirs(variable, rootpath, drs, fx_var=None):
     root = get_rootpath(rootpath, project)
     input_type = 'input_{}dir'.format('fx_' if fx_var else '')
     path_template = _select_drs(input_type, drs, project)
-    print('path_template',path_template)
     dirnames = []
     for dirname_template in _replace_tags(path_template, variable, fx_var):
         dirname_template = os.path.join(root, dirname_template)
@@ -215,7 +214,6 @@ def _find_input_dirs(variable, rootpath, drs, fx_var=None):
         else:
             logger.debug("Skipping non-existent %s", dirname)
 
-    print('dirnames',dirnames)
     return dirnames
 
 
@@ -224,7 +222,6 @@ def _get_filename_glob(variable, drs, fx_var=None):
     input_type = 'input_{}file'.format('fx_' if fx_var else '')
     path_template = _select_drs(input_type, drs, variable['project'])
     filename_glob = _replace_tags(path_template, variable, fx_var)[0]
-    print(filename_glob)
     return filename_glob
 
 
@@ -243,7 +240,6 @@ def _find_input_files(variable, rootpath, drs, fx_var=None):
 def get_input_filelist(variable, rootpath, drs):
     """Return the full path to input files."""
     files = _find_input_files(variable, rootpath, drs)
-    print('full_path_input_files',files)
     files = select_files(files, variable['start_year'], variable['end_year'])
     return files
 
@@ -262,7 +258,6 @@ def get_input_fx_filelist(variable, rootpath, drs):
         files = _find_input_files(var, rootpath, drs, fx_var)
         fx_files[fx_var] = files[0] if files else None
 
-    print(fx_files)
     return fx_files
 
 

@@ -29,7 +29,7 @@ def read_config_user_file(config_file, recipe_name):
         'exit_on_warning': False,
         'max_data_filesize': 100,
         'output_file_type': 'ps',
-        'textoutput_file_type': 'tex',
+        'table_output_file_type': 'tex',
         'output_dir': './output_dir',
         'save_intermediary_cubes': False,
         'remove_preproc_dir': False,

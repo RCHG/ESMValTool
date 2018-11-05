@@ -375,7 +375,6 @@ def _dataset_to_file(variable, config_user):
         variable=variable,
         rootpath=config_user['rootpath'],
         drs=config_user['drs'])
-    print(files)
     if not files and variable.get('derive'):
         variable = copy.deepcopy(variable)
         variable['short_name'], variable['field'] = get_required(
@@ -557,7 +556,6 @@ def _get_input_files(variable, config_user):
         variable=variable,
         rootpath=config_user['rootpath'],
         drs=config_user['drs'])
-    print('input files', input_files)
     # Set up downloading using synda if requested.
     # Do not download if files are already available locally.
     if config_user['synda_download'] and not input_files:
@@ -862,8 +860,6 @@ class Recipe(object):
 
         for dataset in datasets:
             variable = dict(raw_variable)
-            print(raw_variable)
-            print(variable)
             variable.update(dataset)
             if ('cmor_table' not in variable
                     and variable.get('project') in CMOR_TABLES):
@@ -873,7 +869,6 @@ class Recipe(object):
                     variable['end_year'],
                     variable['start_year'] + self._cfg['max_years'] - 1)
             variables.append(variable)
-            print(variables)
         required_keys = {
             'short_name', 'field', 'dataset', 'project', 'start_year',
             'end_year', 'preprocessor', 'diagnostic'
@@ -898,7 +893,6 @@ class Recipe(object):
                 logger.info("Using fx files for var %s of dataset %s:\n%s",
                             variable['short_name'], variable['dataset'],
                             variable['fx_files'])
-        print(variables)
         return variables
 
     def _initialize_preprocessor_output(self, diagnostic_name, raw_variables,
