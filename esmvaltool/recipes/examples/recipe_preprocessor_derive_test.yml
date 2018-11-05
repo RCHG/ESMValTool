@@ -48,7 +48,7 @@ diagnostics:
   derive_diagnostic_MAM:
     description: Test variable derivation
     variables:
-      toz:
+      stratoz:
         preprocessor: prep_season_MAM
         field: T2Ms
         derive: true
@@ -61,7 +61,7 @@ diagnostics:
   derive_diagnostic_JJA:
     description: Test variable derivation season JJA
     variables:
-      toz:
+      stratoz:
         preprocessor: prep_season_JJA
         field: T2Ms
         derive: true

@@ -1918,6 +1918,23 @@
             "ok_min_mean_abs": "", 
             "ok_max_mean_abs": ""
         }, 
+        "stratoz": {
+            "modeling_realm": "aerosol", 
+            "standard_name": "equivalent_thickness_at_stp_of_atmosphere_ozone_content", 
+            "units": "m", 
+            "cell_methods": "area: time: mean", 
+            "cell_measures": "area: areacella", 
+            "long_name": "stratospheric ozone column", 
+            "comment": "stratospheric ozone column in DU, should be consistent with ptp definition of tropopause", 
+            "dimensions": "longitude latitude time", 
+            "out_name": "stratoz", 
+            "type": "float", 
+            "positive": "", 
+            "valid_min": "", 
+            "valid_max": "", 
+            "ok_min_mean_abs": "", 
+            "ok_max_mean_abs": ""
+        },
         "tropoz": {
             "modeling_realm": "aerosol", 
             "standard_name": "equivalent_thickness_at_stp_of_atmosphere_ozone_content", 

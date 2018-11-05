@@ -141,6 +141,8 @@ def get_cfg(filename=None):
         filename = sys.argv[1]
     with open(filename) as file:
         cfg = yaml.safe_load(file)
+
+    print('get-cfg', cfg)
     return cfg
 
 
@@ -200,6 +202,8 @@ def run_diagnostic():
 
     cfg = get_cfg(args.filename)
 
+    print('Here',cfg)
+    
     # Set up logging
     if args.log_level:
         cfg['log_level'] = args.log_level
@@ -221,7 +225,8 @@ def run_diagnostic():
         output_directories.append(cfg['work_dir'])
     if cfg['write_plots']:
         output_directories.append(cfg['plot_dir'])
-
+    if cfg['write_table']:
+        output_directories.append(cfg['table_dir'])
     existing = [p for p in output_directories if os.path.exists(p)]
 
     if existing:

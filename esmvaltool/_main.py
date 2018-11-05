@@ -150,6 +150,7 @@ def main(args):
                 raise ValueError("--{} should be larger than 0.".format(
                     limit.replace('_', '-')))
             cfg[limit] = value
+    print('main',cfg)
 
     resource_log = os.path.join(cfg['run_dir'], 'resource_usage.txt')
     with resource_usage_logger(pid=os.getpid(), filename=resource_log):

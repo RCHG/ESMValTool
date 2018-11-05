@@ -357,7 +357,6 @@ class CMORCheck(object):
     def _check_coord_values(self, coord_info, coord, var_name):
         # Check requested coordinate values exist in coord.points
         self._check_requested_values(coord, coord_info, var_name)
-
         l_fix_coord_value = False
 
         # Check coordinate value ranges
@@ -416,7 +415,7 @@ class CMORCheck(object):
         intervals = {
             'dec': (3600, 3660),
             'yr': (360, 366),
-            'mon': (28, 31),
+            'mon': (28, 31),  
             'day': (1, 1)
         }
         if self.frequency in intervals:

@@ -22,12 +22,14 @@ def read_config_user_file(config_file, recipe_name):
 
     # set defaults
     defaults = {
+        'write_table': True,
         'write_plots': True,
         'write_netcdf': True,
         'compress_netcdf': False,
         'exit_on_warning': False,
         'max_data_filesize': 100,
         'output_file_type': 'ps',
+        'textoutput_file_type': 'tex',
         'output_dir': './output_dir',
         'save_intermediary_cubes': False,
         'remove_preproc_dir': False,
@@ -61,13 +63,14 @@ def read_config_user_file(config_file, recipe_name):
     cfg['preproc_dir'] = os.path.join(cfg['output_dir'], 'preproc')
     cfg['work_dir'] = os.path.join(cfg['output_dir'], 'work')
     cfg['plot_dir'] = os.path.join(cfg['output_dir'], 'plots')
+    cfg['table_dir'] = os.path.join(cfg['output_dir'], 'tables')
     cfg['run_dir'] = os.path.join(cfg['output_dir'], 'run')
 
     cfg_developer = read_config_developer_file(cfg['config_developer_file'])
     for key, value in six.iteritems(cfg_developer):
         CFG[key] = value
     read_cmor_tables(CFG)
-
+    
     return cfg
 
 

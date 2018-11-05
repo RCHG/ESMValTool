@@ -51,7 +51,10 @@ def concatenate_callback(raw_cube, field, _):
 def load_cubes(files, filename, metadata, constraints=None, callback=None):
     """Load iris cubes from files."""
     logger.debug("Loading:\n%s", "\n".join(files))
+    print(files, constraints, callback)
     cubes = iris.load_raw(files, constraints=constraints, callback=callback)
+    print(cubes, files, constraints, callback)
+
     iris.util.unify_time_units(cubes)
     if not cubes:
         raise Exception('Can not load cubes from {0}'.format(files))

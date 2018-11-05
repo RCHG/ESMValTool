@@ -288,11 +288,13 @@ class DiagnosticTask(AbstractTask):
             'run_dir',
             'plot_dir',
             'work_dir',
+            'table_dir',
             'max_data_filesize',
             'output_file_type',
             'log_level',
             'write_plots',
             'write_netcdf',
+            'write_table',
         }
         settings = {'diag_script_info': {}, 'config_user_info': {}}
         for key, value in self.settings.items():

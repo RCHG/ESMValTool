@@ -14,9 +14,9 @@ preprocessors:
 
    # preprocessor: {} -- 'if not preprocessor is used'
    prep_season_mean:
-     seasonal_mean: 
-diagnostics:
+     seasonal_mean:
 
+diagnostics:
   derive_diagnostic_seasons:
     description: Test variable derivation
     variables:
