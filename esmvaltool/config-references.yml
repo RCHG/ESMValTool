@@ -56,6 +56,10 @@ authors:
     name: Andrews, Oliver
     institute: Tyndall Centre, UK
     email: oliverdandrews 'at' googlemail.com
+  arno_en:
+    name: Arnone, Enrico
+    institute: ISAC-CNR, Torino, Italy
+    email: e.arnone 'at' isac.cnr.it 
   bock_ls:
     name: Bock, Lisa
     institute: DLR, Germany
@@ -102,6 +106,10 @@ authors:
   hann_ul:
     name: Hansson, Ulf
     institute: SMHI, Sweden
+  hard_jo:
+    name: von Hardenberg, Jost
+    institute: ISAC-CNR, Torino, Italy
+    email: j.vonhardenberg 'at' isac.cnr.it    
   hemp_ni:
     name: Hempelmann, Nils
     institute: IPSL, France

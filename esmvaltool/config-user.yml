@@ -37,6 +37,7 @@ config_developer_file: null
 # Only available for Python diagnostics
 profile_diagnostic: false
 
+# Rootpaths to the data from different projects (lists are also possible)
 rootpath:
   # Rootpath to CMIP5 data
   CMIP5: /home/inca1/rcheca/ESMValTool/esmvaltool_input

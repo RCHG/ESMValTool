@@ -8,7 +8,9 @@ import shutil
 import sys
 import time
 from collections import OrderedDict
+from datetime import datetime
 
+import iris
 import yaml
 
 logger = logging.getLogger(__name__)
@@ -135,13 +137,107 @@ def sorted_group_metadata(metadata_groups, sort):
     return groups
 
 
+def extract_variables(cfg, as_iris=False):
+    """Extract basic variable information from configuration dictionary.
+
+    Returns `short_name`, `standard_name`, `long_name` and `units` keys for
+    each variable.
+
+    Parameters
+    ----------
+    cfg : dict
+        Diagnostic script configuration.
+    as_iris : bool, optional
+        Replace `short_name` by `var_name`, this can be used directly in
+        :mod:`iris` classes.
+
+    Returns
+    -------
+    dict
+        Variable information in :obj:`dict`s (values) for each `short_name`
+        (key).
+
+    """
+    keys_to_extract = [
+        'short_name',
+        'standard_name',
+        'long_name',
+        'units',
+    ]
+
+    # Extract variables
+    input_data = cfg['input_data'].values()
+    variable_data = group_metadata(input_data, 'short_name')
+    variables = {}
+    for (short_name, data) in variable_data.items():
+        data = data[0]
+        variables[short_name] = {}
+        info = variables[short_name]
+        for key in keys_to_extract:
+            info[key] = data[key]
+
+        # Replace short_name by var_name if desired
+        if as_iris:
+            info['var_name'] = info.pop('short_name')
+
+    return variables
+
+
+def variables_available(cfg, short_names):
+    """Check if data from certain variables is available.
+
+    Parameters
+    ----------
+    cfg : dict
+        Diagnostic script configuration.
+    short_names : list of str
+        Variable `short_names` which should be checked.
+
+    Returns
+    -------
+    bool
+        `True` if all variables available, `False` if not.
+
+    """
+    input_data = cfg['input_data'].values()
+    available_short_names = list(group_metadata(input_data, 'short_name'))
+    for var in short_names:
+        if var not in available_short_names:
+            return False
+    return True
+
+
+def save_iris_cube(cube, path, cfg):
+    """Save iris cube and append ESMValTool information.
+
+    Parameters
+    ----------
+    cube : iris.cube.Cube
+        Cube to be saved.
+    path : str
+        Desired path.
+    cfg : dict
+        Diagnostic script configuration.
+
+    """
+    attr = {
+        'created_by':
+        'ESMValTool version {}'.format(cfg['version']) +
+        ', diagnostic {}'.format(cfg['script']),
+        'creation_date':
+        datetime.utcnow().isoformat(' ') + 'UTC'
+    }
+    cube.attributes.update(attr)
+    iris.save(cube, path)
+    logger.info("Wrote %s", path)
+
+
 def get_cfg(filename=None):
     """Read diagnostic script configuration from settings.yml."""
     if filename is None:
         filename = sys.argv[1]
     with open(filename) as file:
         cfg = yaml.safe_load(file)
-
     return cfg
 
 
@@ -201,7 +297,6 @@ def run_diagnostic():
 
     cfg = get_cfg(args.filename)
 
-    
     # Set up logging
     if args.log_level:
         cfg['log_level'] = args.log_level
@@ -223,8 +318,7 @@ def run_diagnostic():
         output_directories.append(cfg['work_dir'])
     if cfg['write_plots']:
         output_directories.append(cfg['plot_dir'])
-    if cfg['write_table']:
-        output_directories.append(cfg['table_dir'])
+
     existing = [p for p in output_directories if os.path.exists(p)]
 
     if existing:

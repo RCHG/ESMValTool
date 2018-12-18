@@ -4,17 +4,23 @@ Time operations on cubes
 Allows for selecting data subsets using certain time bounds;
 constructing seasonal and area averages.
 """
+import os
+import logging
 
 import iris
 import iris.coord_categorisation
 import numpy as np
 
+from .._config import use_legacy_iris
+
+logger = logging.getLogger(os.path.basename(__file__))
+
 
 # slice cube over a restricted time period
-def time_slice(mycube, start_year, start_month, start_day,
-               end_year, end_month, end_day):
+def time_slice(mycube, start_year, start_month, start_day, end_year, end_month,
+               end_day):
     """
-    Slice cube on time
+    Slice cube on time.
 
     Function that returns a subset of the original cube (slice)
     given two dates of interest start date and end date
@@ -38,8 +44,8 @@ def time_slice(mycube, start_year, start_month, start_day,
             start_day = 30
         if end_day > 30:
             end_day = 30
-    start_date = datetime.datetime(int(start_year),
-                                   int(start_month), int(start_day))
+    start_date = datetime.datetime(
+        int(start_year), int(start_month), int(start_day))
     end_date = datetime.datetime(int(end_year), int(end_month), int(end_day))
 
     t_1 = time_units.date2num(start_date)
@@ -75,9 +81,8 @@ def extract_season(cube, season):
     if not cube.coords('clim_season'):
         iris.coord_categorisation.add_season(cube, 'time', name='clim_season')
     if not cube.coords('season_year'):
-        iris.coord_categorisation.add_season_year(cube,
-                                                  'time',
-                                                  name='season_year')
+        iris.coord_categorisation.add_season_year(
+            cube, 'time', name='season_year')
     return cube.extract(iris.Constraint(clim_season=season.lower()))
 
 
@@ -130,6 +135,7 @@ def time_average(cube):
                           weights=time_weights)
 
 
+# get the seasonal mean
 def seasonal_mean(cube):
     """
     Function to compute seasonal means with MEAN

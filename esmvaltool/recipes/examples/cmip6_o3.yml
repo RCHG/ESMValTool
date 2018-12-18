@@ -1,0 +1,37 @@
+---
+# vmro3_input4MIPs_ozone_CMIP_UReading-CCMI-1-0_gn_185001-201412.nc
+# o3_Amon_input4MIPs_historical_r1i1p1_gn_185001-201412.nc
+datasets:
+#  - {dataset: CESM1-WACCM,    project: CMIP5, mip: Amon, exp: historical, ensemble: r2i1p1, start_year: 1997, end_year: 2005}
+#  - {dataset: CNRM-CM5,       project: CMIP5, mip: Amon, exp: historical, ensemble: r1i1p1, start_year: 1997, end_year: 2005}
+  - {dataset: input4MIPs,    project: CMIP6, mip: AERmon, exp: historical, ensemble: r1i1p1-v4, start_year: 1850, end_year: 2014, grid: gn}
+#  - {dataset: GISS-E2-H,      project: CMIP5, mip: Amon, exp: historical, ensemble: r1i1p2, start_year: 1997, end_year: 2005}
+#  - {dataset: GISS-E2-R,      project: CMIP5, mip: Amon, exp: historical, ensemble: r1i1p2, start_year: 1997, end_year: 2005}
+#   - {dataset: MIROC-ESM-CHEM, project: CMIP5, mip: Amon, exp: historical, ensemble: r1i1p1, start_year: 1997, end_year: 2005}
+#  - {dataset: ESACCI-OZONE,   project: OBS,   tier: 2,   type: sat,       version: L3,      start_year: 1997, end_year: 2005}
+#   - {dataset: NIWA,           project: OBS,   tier: 3,   type: reanaly,   version: 1,       start_year: 1997, end_year: 2005}
+
+preprocessors:
+
+   mypreprocessor: {} # -- 'if not preprocessor is used'
+
+diagnostics:
+  derive_diagnostic_seasons:
+    description: Test variable derivation
+    variables:
+      toz:
+        field: T2Ms
+        derive: True
+        #force_derivation: True
+    additional_datasets: []
+    scripts:
+    # scripts: null -- 'if no scripts is used'
+      script1: &test_plot
+        script: examples/diagnostic.py
+        quickplot:
+          plot_type: contourf
+          maps: True
+          cmap: Spectral
+
+
+

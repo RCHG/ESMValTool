@@ -99,7 +99,7 @@ def get_required(short_name, field=None):
             ('rsutcs', 'T2' + frequency + 's'),
         ],
         'toz': [
-            ('tro3', 'T3' + frequency),
+            ('o3', 'T3' + frequency),
             ('ps', 'T2' + frequency + 's'),
         ],
         'tropoz': [
@@ -847,6 +847,7 @@ def _pressure_level_widths(tro3_cube, ps_cube, top_limit=0):
         Cube of same shape as tro3_cube containing pressure level widths.
 
     """
+    print(tro3_cube)
     assert ps_cube.units == 'Pa'
     assert tro3_cube.coord('air_pressure').units == 'Pa'
 

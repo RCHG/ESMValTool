@@ -41,7 +41,6 @@ def plot_results(cube, filename, cfg):
 
 def main(cfg):
     """Compute the time average for each input dataset."""
-
     # Get a description of the preprocessed data that we will use as input.
     input_data = cfg['input_data'].values()
 
